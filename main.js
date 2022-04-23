@@ -32,16 +32,20 @@ const Data = [
     correct: "b",
   },
 ];
-
-const option1 = document.getElementById("option1");
-const option2 = document.getElementById("option2");
-const option3 = document.getElementById("option3");
-const option4 = document.getElementById("option4");
+const grabId = (idName) => {
+  const ElementId = document.getElementById(idName);
+  if (ElementId) return ElementId;
+  throw new Error(`cannot find the id ${idName}`);
+};
+const option1 = grabId("option1");
+const option2 = grabId("option2");
+const option3 = grabId("option3");
+const option4 = grabId("option4");
 const question = document.querySelector("h3");
-let nextBtn = document.getElementById("btn-next");
-let prevBtn = document.getElementById("btn-prev");
+let nextBtn = grabId("btn-next");
+let prevBtn = grabId("btn-prev");
 
-const quiz = document.getElementById("quiz");
+const quiz = grabId("quiz");
 const answers = document.querySelectorAll(".answer");
 
 let initialQuize = 0;
