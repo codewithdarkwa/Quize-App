@@ -41,20 +41,19 @@ const option1 = grabId("option1");
 const option2 = grabId("option2");
 const option3 = grabId("option3");
 const option4 = grabId("option4");
-const question = document.querySelector("h3");
 let nextBtn = grabId("btn-next");
 let prevBtn = grabId("btn-prev");
-
 const quiz = grabId("quiz");
+const question = document.querySelector("h3");
 const answers = document.querySelectorAll(".answer");
 
-let initialQuize = 0;
+let currentQuize = 0;
 let score = 0;
 
 loadQuize();
 function loadQuize() {
   unCheckAnswer();
-  let nextOption = Data[initialQuize];
+  let nextOption = Data[currentQuize];
   question.innerText = nextOption.question;
   option1.innerText = nextOption.a;
   option2.innerText = nextOption.b;
@@ -66,11 +65,11 @@ function loadQuize() {
 function nextQuestion() {
   const answer = getValue();
   if (answer) {
-    if (answer === Data[initialQuize].correct) {
+    if (answer === Data[currentQuize].correct) {
       score++;
     }
-    initialQuize++;
-    if (initialQuize < Data.length) {
+    currentQuize++;
+    if (currentQuize < Data.length) {
       loadQuize();
     } else if (score === Data.length) {
       quiz.innerHTML = `<h1> Congratulations 👏👏 <br/>You scored ${score}/${Data.length}</h1>`;
@@ -81,7 +80,7 @@ function nextQuestion() {
 }
 
 function PreviousQuestion() {
-  if (initialQuize.valueOf() === 0) {
+  if (currentQuize.valueOf() === 0) {
     alert("Can't go back anymore");
   } else {
     initialQuize--;
